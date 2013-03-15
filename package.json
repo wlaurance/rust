@@ -1,0 +1,26 @@
+{
+  "name": "rust",
+  "version": "0.0.0",
+  "description": "riak cluster like a boss",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wlaurance/rust.git"
+  },
+  "keywords": [
+    "riak",
+    "cluster",
+    "configuration"
+  ],
+  "author": "Will S. Laurance",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "9cf425193a998385cdaa1b74a40a6ee7f68e0993",
+  "devDependencies": {
+    "should": "~1.2.2",
+    "mocha": "~1.8.2"
+  }
+}
