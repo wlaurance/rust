@@ -1,4 +1,4 @@
 r[iak cl]ust[er]
 ================
 
-Show those Riak clusters whose boss!
+Show those Riak clusters who's boss!
