@@ -2,10 +2,15 @@ var should = require('should'),
   rust = require('./index.js'),
   fs = require('fs'),
   async = require('async'),
-  client = new rust({config:'./app.config.test', args:'./vm.args.test'});
+  client;
+
+/*
+ * test vars
+ */
+var host = '10.10.2.3', port = 9000;
 
 describe('API', function(){
-  before(function(done){
+  beforeEach(function(done){
     var files = ['./app.config', './vm.args'];
     var iterator = function(file, callback){
       var read = fs.createReadStream(file);
@@ -18,17 +23,28 @@ describe('API', function(){
       if(err){
         throw err;
       }
+      client = rust({config:'./app.config.test', args:'./vm.args.test'});
       done();
     });
   });
   it('should set a host name', function(done){
-    client.setHostName('10.10.2.3', function(err){
+    client.setHostName(host, function(err){
       should.equal(err, null);
       fs.readFile('./app.config.test', function(err, blob){
-        should.notEqual(blob.toString().indexOf('10.10.2.3'), -1);
+        should.notEqual(blob.toString().indexOf("{http, [ {\"" + host + '"'), -1);
+        should.equal(blob.toString().indexOf("{https, [ {\"" + host + '"'), -1);
         done();
       });
-    })
+    });
+  });
+  it('should set the http port', function(done){
+    client.setHTTPPort(port, function(err){
+      fs.readFile('./app.config.test', function(err, blob){
+        should.notEqual(blob.toString().indexOf("{http, [ {\"" + host + '", ' + port), -1);
+        should.equal(blob.toString().indexOf("{https, [ {\"" + host + '", ' + port), -1);
+        done();
+      });
+    });
   });
   after(function(done){
     var files = ['./app.config.test', './vm.args.test'];
