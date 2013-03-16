@@ -2,7 +2,7 @@ var should = require('should'),
   rust = require('./index.js'),
   fs = require('fs'),
   async = require('async'),
-  client;
+  client = rust({config:'./app.config.test', args:'./vm.args.test'});
 
 /*
  * test vars
@@ -10,7 +10,7 @@ var should = require('should'),
 var host = '10.10.2.3', port = 9000;
 
 describe('API', function(){
-  beforeEach(function(done){
+  before(function(done){
     var files = ['./app.config', './vm.args'];
     var iterator = function(file, callback){
       var read = fs.createReadStream(file);
@@ -23,7 +23,6 @@ describe('API', function(){
       if(err){
         throw err;
       }
-      client = rust({config:'./app.config.test', args:'./vm.args.test'});
       done();
     });
   });
