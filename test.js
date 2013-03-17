@@ -7,7 +7,7 @@ var should = require('should'),
 /*
  * test vars
  */
-var host = '10.10.2.3', port = 9000;
+var host = '10.10.2.3', port = 9000, handoff_port = 9001;
 
 describe('API', function(){
   before(function(done){
@@ -41,6 +41,14 @@ describe('API', function(){
       fs.readFile('./app.config.test', function(err, blob){
         should.notEqual(blob.toString().indexOf("{http, [ {\"" + host + '", ' + port), -1);
         should.equal(blob.toString().indexOf("{https, [ {\"" + host + '", ' + port), -1);
+        done();
+      });
+    });
+  });
+  it('should set the handoff port', function(done){
+    client.setHandoffPort(handoff_port, function(err){
+      fs.readFile('./app.config.test', function(err, blob){
+        should.notEqual(blob.toString().indexOf("handoff_port, " + handoff_port), -1);
         done();
       });
     });

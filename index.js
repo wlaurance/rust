@@ -25,6 +25,14 @@ module.exports = function(params){
         file:params.config
       };
       replace(ops, callback);
+    },
+    setHandoffPort:function(port, callback){
+      var ops = {
+        regex:'handoff_port,(.+)}',
+        value:'handoff_port, ' + port + ' }',
+        file:params.config
+      };
+      replace(ops, callback);
     }
   };
   return rust;
