@@ -33,6 +33,13 @@ module.exports = function(params){
         file:params.config
       };
       replace(ops, callback);
+    },
+    setPBIP:function(host, callback){
+      replace({
+        regex:'pb_ip,(.+)}',
+        value:'pb_ip, "' + host + '" }',
+        file:params.config
+      }, callback);
     }
   };
   return rust;

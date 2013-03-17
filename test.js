@@ -53,6 +53,14 @@ describe('API', function(){
       });
     });
   });
+  it('should set the pb ip', function(done){
+    client.setPBIP(host, function(err){
+      fs.readFile('./app.config.test', function(err, blob){
+        should.notEqual(blob.toString().indexOf("pb_ip, \"" + host + '"'), -1);
+        done();
+      });
+    });
+  });
   after(function(done){
     var files = ['./app.config.test', './vm.args.test'];
     async.each(files, fs.unlink, function(err){
