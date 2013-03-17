@@ -40,6 +40,13 @@ module.exports = function(params){
         value:'pb_ip, "' + host + '" }',
         file:params.config
       }, callback);
+    },
+    setPBPort:function(port, callback){
+      replace({
+        regex:'pb_port,(.+)}',
+        value:'pb_port, ' + port + ' }',
+        file:params.config
+      }, callback);
     }
   };
   return rust;

@@ -7,7 +7,7 @@ var should = require('should'),
 /*
  * test vars
  */
-var host = '10.10.2.3', port = 9000, handoff_port = 9001;
+var host = '10.10.2.3', port = 9000, handoff_port = 9001, pb_port = 8000;
 
 describe('API', function(){
   before(function(done){
@@ -57,6 +57,14 @@ describe('API', function(){
     client.setPBIP(host, function(err){
       fs.readFile('./app.config.test', function(err, blob){
         should.notEqual(blob.toString().indexOf("pb_ip, \"" + host + '"'), -1);
+        done();
+      });
+    });
+  });
+  it('should set the pb port', function(done){
+    client.setPBPort(pb_port, function(err){
+      fs.readFile('./app.config.test', function(err, blob){
+        should.notEqual(blob.toString().indexOf("pb_port, " + pb_port), -1);
         done();
       });
     });
