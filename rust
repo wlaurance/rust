@@ -31,6 +31,14 @@ p
             });
             break;
           }
+          case 'handoff-port':{
+            client.setHandoffPort(arg, function(err){
+              if (err){
+                throw err;
+              }
+            });
+            break;
+          }
         }
         break;
       }
