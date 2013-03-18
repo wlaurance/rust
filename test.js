@@ -77,6 +77,14 @@ describe('API', function(){
       });
     });
   });
+  describe('Storage Backend', function(){
+    it('should retrieve the backend storage type', function(done){
+      client.backend.getType(function(err, name){
+        name.should.equal('riak_kv_bitcask_backend');
+        done();
+      });
+    });
+  });
   after(function(done){
     var files = ['./app.config.test', './vm.args.test'];
     async.each(files, fs.unlink, function(err){

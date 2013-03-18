@@ -1,5 +1,6 @@
 var fs = require('fs'),
-  spawn = require('child_process').spawn;
+  spawn = require('child_process').spawn,
+  backend = require('./backend');
 
 var replace = function(params, callback){
   var p = spawn('./node_modules/.bin/replace', [params.regex, params.value, params.file], {stdio:'inherit'});
@@ -9,6 +10,7 @@ var replace = function(params, callback){
 };
 
 module.exports = function(params){
+  backend = backend(params);
   var rust = {
     setHostName:function(host, callback){
       var ops = {
@@ -54,7 +56,8 @@ module.exports = function(params){
         value:'$1% {pb_ip',
         file:params.config
       }, callback);
-    }
+    },
+    backend:backend
   };
   return rust;
 };
