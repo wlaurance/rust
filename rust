@@ -21,6 +21,15 @@ p
                 throw err;
               }
             });
+            break;
+          }
+          case 'host':{
+            client.setHostName(arg, function(err){
+              if (err){
+                throw err;
+              }
+            });
+            break;
           }
         }
         break;
