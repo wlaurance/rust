@@ -84,6 +84,14 @@ describe('API', function(){
         done();
       });
     });
+    it('should set the type of the backend', function(done){
+      client.backend.setType('riak_kv_eleveldb_backend', function(err){
+        client.backend.getType(function(err, name){
+          name.should.equal('riak_kv_eleveldb_backend');
+          done();
+        });
+      });
+    });
   });
   after(function(done){
     var files = ['./app.config.test', './vm.args.test'];
