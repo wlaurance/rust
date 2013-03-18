@@ -69,6 +69,14 @@ describe('API', function(){
       });
     });
   });
+  it('should disable the pb interface', function(done){
+    client.disablePB(function(err){
+      fs.readFile('./app.config.test', function(err, blob){
+        should.notEqual(blob.toString().indexOf("% {pb_ip"), -1);
+        done();
+      });
+    });
+  });
   after(function(done){
     var files = ['./app.config.test', './vm.args.test'];
     async.each(files, fs.unlink, function(err){

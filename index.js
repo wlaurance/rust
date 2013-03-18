@@ -47,6 +47,13 @@ module.exports = function(params){
         value:'pb_port, ' + port + ' }',
         file:params.config
       }, callback);
+    },
+    disablePB:function(callback){
+      replace({
+        regex:'(.+){pb_ip',
+        value:'$1% {pb_ip',
+        file:params.config
+      }, callback);
     }
   };
   return rust;
