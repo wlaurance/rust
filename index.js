@@ -57,7 +57,27 @@ module.exports = function(params){
         file:params.config
       }, callback);
     },
-    backend:backend
+    backend:backend,
+    getSearch:function(callback){
+      fs.readFile(params.config, function(err, blob){
+        blob.toString().replace(/riak_search,\s+\[\s.+\n\s+{enabled,(.+)}/, function(r, search){
+          if (typeof(search) === 'string'){
+            search = search.trim() === 'true' ? true : false;
+          }
+          callback(null, search);
+        });
+      });
+    },
+    setSearch:function(enabled, callback){
+      fs.readFile(params.config, function(err, blob){
+        blob.toString().replace(/riak_search,(\s+\[\s.+\n\s+){enabled,(.+)}/, function(r, c, s){
+          var buildString = r.replace(s.trim(), enabled);
+          fs.writeFile(params.config, blob.toString().replace(r, buildString), function(err){
+            callback(err);
+          });
+        });
+      });
+    }
   };
   return rust;
 };

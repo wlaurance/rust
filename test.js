@@ -93,6 +93,23 @@ describe('API', function(){
       });
     });
   });
+  describe('riak search', function(){
+    it('should see if search is enabled', function(done){
+      client.getSearch(function(err, enabled){
+        enabled.should.equal(false);
+        done();
+      });
+    });
+    it('should set search enabled', function(done){
+      client.setSearch(true, function(err){
+        client.getSearch(function(err, enabled){
+          console.log(enabled);
+          enabled.should.equal(true);
+          done();
+        });
+      });
+    });
+  });
   after(function(done){
     var files = ['./app.config.test', './vm.args.test'];
     async.each(files, fs.unlink, function(err){
