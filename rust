@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+var lib = require('./index'),
+  p = require('commander');
+
+p
+  .version(require('./package').version)
+  .option('-c, --configFile [file]', 'config file, defaults to cwd/app.config', process.cwd() + '/app.config')
+  .option('-m, --vmargsFile [file]', 'vm file, defaults to cwd/vm.args', process.cwd() + '/vm.args')
+
+p
+  .command('http <cmd> <what> <arg>')
+  .description('http related commands')
+  .action(function(cmd, what, arg){
+    var client = new lib({config:p.configFile, args:p.vmargsFile});
+    switch(cmd){
+      case 'set':{
+        switch(what){
+          case 'port':{
+            client.setHTTPPort(arg, function(err){
+              if (err){
+                throw err;
+              }
+            });
+          }
+        }
+        break;
+      }
+    }
+  });
+
+p
+  .parse(process.argv);
+
+

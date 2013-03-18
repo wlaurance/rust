@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "riak cluster like a boss",
   "main": "index.js",
+  "bin": {
+    "rust":"./rust.js"
+  },
   "scripts": {
     "test": "./node_modules/.bin/mocha"
   },
@@ -25,6 +28,7 @@
   },
   "dependencies": {
     "async": "~0.2.6",
-    "replace": "~0.2.4"
+    "replace": "~0.2.4",
+    "commander": "~1.1.1"
   }
 }
