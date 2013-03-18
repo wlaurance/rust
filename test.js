@@ -103,7 +103,6 @@ describe('API', function(){
     it('should set search enabled', function(done){
       client.setSearch(true, function(err){
         client.getSearch(function(err, enabled){
-          console.log(enabled);
           enabled.should.equal(true);
           done();
         });

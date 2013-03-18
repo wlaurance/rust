@@ -3,7 +3,7 @@ var fs = require('fs'),
   backend = require('./backend');
 
 var replace = function(params, callback){
-  var p = spawn('./node_modules/.bin/replace', [params.regex, params.value, params.file], {stdio:'inherit'});
+  var p = spawn('./node_modules/.bin/replace', [params.regex, params.value, params.file]);
   p.on('exit', function(code){
     callback();
   });
