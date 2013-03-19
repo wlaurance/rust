@@ -46,6 +46,13 @@ p
   });
 
 p
+  .command('pb <cmd> <what> <arg>')
+  .description('protocol buffer related commands')
+  .action(function(cmd, what, arg){
+    console.log('coming soon');
+  });
+
+p
   .parse(process.argv);
 
 
