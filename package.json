@@ -1,10 +1,10 @@
 {
   "name": "rust",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "riak cluster like a boss",
   "main": "index.js",
   "bin": {
-    "rust":"./rust.js"
+    "rust": "./rust.js"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha"
