@@ -61,6 +61,14 @@ p
             });
             break;
           }
+          case 'port':{
+            client.setPBPort(arg, function(err){
+              if(err){
+                throw err;
+              }
+            });
+            break;
+          }
         }
       }
       break;
