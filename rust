@@ -93,6 +93,27 @@ p
   });
 
 p
+  .command('backend <name>')
+  .description('set backend type like bitcast or leveldb or backend get to get the current type')
+  .action(function(name){
+    var client = new lib({config:p.configFile, args:p.vmargsFile});
+    if(name !== 'get'){
+      client.backend.setType(name, function(err){
+        if(err){
+          throw err;
+        }
+      });
+    } else {
+      client.backend.getType(function(err, type){
+        if(err){
+          throw err;
+        }
+        console.log(type);
+      });
+    }
+  });
+
+p
   .parse(process.argv);
 
 
