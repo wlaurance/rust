@@ -76,6 +76,23 @@ p
   });
 
 p
+  .command('disable <what>')
+  .description('disable something')
+  .action(function(what){
+    var client = new lib({config:p.configFile, args:p.vmargsFile});
+    switch(what){
+      case 'pb':{
+        client.disablePB(function(err){
+          if(err){
+            throw err;
+          }
+        });
+        break;
+      }
+    }
+  });
+
+p
   .parse(process.argv);
 
 
