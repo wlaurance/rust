@@ -49,7 +49,22 @@ p
   .command('pb <cmd> <what> <arg>')
   .description('protocol buffer related commands')
   .action(function(cmd, what, arg){
-    console.log('coming soon');
+    var client = new lib({config:p.configFile, args:p.vmargsFile});
+    switch(cmd){
+      case 'set':{
+        switch(what){
+          case 'ip':{
+            client.setPBIP(arg, function(err){
+              if (err){
+                throw err;
+              }
+            });
+            break;
+          }
+        }
+      }
+      break;
+    }
   });
 
 p
