@@ -124,6 +124,20 @@ describe('API', function(){
         });
       });
     });
+    it('should get the cookie name', function(done){
+      client.getCookieName(function(err, name){
+        name.should.equal("riak");
+        done();
+      });
+    });
+    it('should set the cookie name', function(done){
+      client.setCookieName("myriakCookie123", function(err){
+        client.getCookieName(function(err, name){
+          name.should.equal("myriakCookie123");
+          done();
+        });
+      });
+    });
   });
   after(function(done){
     var files = ['./app.config.test', './vm.args.test'];

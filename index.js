@@ -91,6 +91,20 @@ module.exports = function(params){
         value:"$1name " + name,
         file:params.args
       }, callback);
+    },
+    getCookieName:function(callback){
+      fs.readFile(params.args, function(err, blob){
+        blob.toString().replace(/-setcookie(.+)/, function(r, name){
+          callback(null, name.trim());
+        });
+      });
+    },
+    setCookieName:function(name, callback){
+      replace({
+        regex:"(.)setcookie(.+)",
+        value:"$1setcookie " + name,
+        file:params.args
+      }, callback);
     }
   };
   return rust;
