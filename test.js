@@ -109,6 +109,22 @@ describe('API', function(){
       });
     });
   });
+  describe('vm.args', function(){
+    it('should get the node name', function(done){
+      client.getNodeName(function(err, name){
+        name.should.equal("riak@127.0.0.1");
+        done();
+      });
+    });
+    it('should set the node name', function(done){
+      client.setNodeName('myriak@192.168.1.100', function(err){
+        client.getNodeName(function(err, name){
+          name.should.equal("myriak@192.168.1.100");
+          done();
+        });
+      });
+    });
+  });
   after(function(done){
     var files = ['./app.config.test', './vm.args.test'];
     async.each(files, fs.unlink, function(err){

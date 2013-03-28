@@ -77,6 +77,20 @@ module.exports = function(params){
           });
         });
       });
+    },
+    getNodeName:function(callback){
+      fs.readFile(params.args, function(err, blob){
+        blob.toString().replace(/-name(.+)/, function(r, name){
+          callback(null, name.trim());
+        });
+      });
+    },
+    setNodeName:function(name, callback){
+      replace({
+        regex:"(.)name(.+)",
+        value:"$1name " + name,
+        file:params.args
+      }, callback);
     }
   };
   return rust;
