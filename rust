@@ -11,7 +11,7 @@ p
   .command('http <cmd> <what> <arg>')
   .description('http related commands')
   .action(function(cmd, what, arg){
-    var client = new lib({config:p.configFile, args:p.vmargsFile});
+    var client = getClient();
     switch(cmd){
       case 'set':{
         switch(what){
@@ -49,7 +49,7 @@ p
   .command('pb <cmd> <what> <arg>')
   .description('protocol buffer related commands')
   .action(function(cmd, what, arg){
-    var client = new lib({config:p.configFile, args:p.vmargsFile});
+    var client = getClient();
     switch(cmd){
       case 'set':{
         switch(what){
@@ -79,7 +79,7 @@ p
   .command('disable <what>')
   .description('disable something')
   .action(function(what){
-    var client = new lib({config:p.configFile, args:p.vmargsFile});
+    var client = getClient();
     switch(what){
       case 'pb':{
         client.disablePB(function(err){
@@ -96,7 +96,7 @@ p
   .command('backend <name>')
   .description('set backend type like bitcast or leveldb or backend get to get the current type')
   .action(function(name){
-    var client = new lib({config:p.configFile, args:p.vmargsFile});
+    var client = getClient();
     if(name !== 'get'){
       client.backend.setType(name, function(err){
         if(err){
@@ -113,6 +113,16 @@ p
     }
   });
 
+p
+  .command('nodename <name>')
+  .description('set nodename')
+  .action(function(name){
+    var client = getClient();
+  });
+
+var getClient = function(){
+  return new lib({config:p.configFile, args:p.vmargsFile});
+}
 p
   .parse(process.argv);
 
