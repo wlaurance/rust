@@ -115,9 +115,21 @@ p
 
 p
   .command('nodename <name>')
-  .description('set nodename')
+  .description('set nodename or nodename get to get the current name')
   .action(function(name){
     var client = getClient();
+    if(name !== 'get'){
+      client.setNodeName(name, function(err){
+        if(err){
+          throw err;
+        }
+      });
+    } else {
+      client.getNodeName(function(err, name){
+        console.log(name);
+      });
+    }
+
   });
 
 var getClient = function(){
