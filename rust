@@ -129,7 +129,24 @@ p
         console.log(name);
       });
     }
+  });
 
+p
+  .command('cookie <name>')
+  .description('set cookie name or cookie get to get the current name')
+  .action(function(name){
+    var client = getClient();
+    if(name !== 'get'){
+      client.setCookieName(name, function(err){
+        if(err){
+          throw err;
+        }
+      });
+    } else {
+      client.getCookieName(function(err, name){
+        console.log(name);
+      });
+    }
   });
 
 var getClient = function(){
