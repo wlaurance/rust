@@ -4,7 +4,7 @@
   "description": "riak cluster like a boss",
   "main": "index.js",
   "bin": {
-    "rust": "./rust.js"
+    "rust": "./rust"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha"
