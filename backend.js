@@ -12,7 +12,7 @@ module.exports = function(params){
     },
     setType:function(type, callback){
       replace({
-        regex:'storage_backend,(.+)}',
+        regex:/storage_backend,(.+)}/,
         value:'storage_backend, ' + type + ' }',
         file:params.config
       }, callback);

@@ -1,6 +1,12 @@
+var fs = require('fs');
+
 module.exports = function(params, callback){
-  var p = require('child_process').spawn('./local_bin/replace/bin/replace.js', [params.regex, params.value, params.file], {stdio:'inherit'});
-  p.on('exit', function(code){
-    callback();
+  fs.readFile(params.file, function(err, blob){
+    if (err) throw err;
+    blob.toString().replace(params.regex, function(r, c){
+      fs.writeFile(params.file, blob.toString().replace(r, params.value), function(err){
+        callback(err);
+      });
+    });
   });
 };

@@ -8,7 +8,7 @@ module.exports = function(params){
   var rust = {
     setHostName:function(host, callback){
       var ops = {
-        regex:'http, (.+)"',
+        regex:/http, (.+)"/,
         value:'http, [ {"' + host + '"',
         file:params.config
       };
@@ -16,7 +16,7 @@ module.exports = function(params){
     },
     setHTTPPort:function(port, callback){
       var ops = {
-        regex:'http, (.+), (.+) }',
+        regex:/http, (.+), (.+) }/,
         value:'http, $1, ' + port + ' }',
         file:params.config
       };
@@ -24,7 +24,7 @@ module.exports = function(params){
     },
     setHandoffPort:function(port, callback){
       var ops = {
-        regex:'handoff_port,(.+)}',
+        regex:/handoff_port,(.+)}/,
         value:'handoff_port, ' + port + ' }',
         file:params.config
       };
@@ -32,22 +32,22 @@ module.exports = function(params){
     },
     setPBIP:function(host, callback){
       replace({
-        regex:'pb_ip,(.+)}',
+        regex:/pb_ip,(.+)}/,
         value:'pb_ip, "' + host + '" }',
         file:params.config
       }, callback);
     },
     setPBPort:function(port, callback){
       replace({
-        regex:'pb_port,(.+)}',
+        regex:/pb_port,(.+)}/,
         value:'pb_port, ' + port + ' }',
         file:params.config
       }, callback);
     },
     disablePB:function(callback){
       replace({
-        regex:'(.+){pb_ip',
-        value:'$1% {pb_ip',
+        regex:/(.+){pb_ip/,
+        value:/$1% {pb_ip/,
         file:params.config
       }, callback);
     },
@@ -81,8 +81,8 @@ module.exports = function(params){
     },
     setNodeName:function(name, callback){
       replace({
-        regex:"(.)name(.+)",
-        value:"$1name " + name,
+        regex:/-name(.+)/,
+        value:"-name " + name,
         file:params.args
       }, callback);
     },
@@ -95,8 +95,8 @@ module.exports = function(params){
     },
     setCookieName:function(name, callback){
       replace({
-        regex:"(.)setcookie(.+)",
-        value:"$1setcookie " + name,
+        regex:/-setcookie(.+)/,
+        value:"-setcookie " + name,
         file:params.args
       }, callback);
     }
