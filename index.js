@@ -1,13 +1,7 @@
 var fs = require('fs'),
   spawn = require('child_process').spawn,
-  backend = require('./backend');
-
-var replace = function(params, callback){
-  var p = spawn(__dirname + '/node_modules/.bin/replace', [params.regex, params.value, params.file]);
-  p.on('exit', function(code){
-    callback();
-  });
-};
+  backend = require('./backend'),
+  replace = require('./replace');
 
 module.exports = function(params){
   backend = backend(params);

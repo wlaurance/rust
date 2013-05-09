@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "async": "~0.2.6",
-    "replace": "~0.2.4",
     "commander": "~1.1.1"
   }
 }

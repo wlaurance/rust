@@ -1,12 +1,6 @@
-var fs = require('fs'),
-  spawn = require('child_process').spawn;
+var replace = require('./replace'),
+    fs = require('fs');
 
-var replace = function(params, callback){
-  var p = spawn('./node_modules/.bin/replace', [params.regex, params.value, params.file]);
-  p.on('exit', function(code){
-    callback();
-  });
-};
 module.exports = function(params){
   return {
     getType:function(callback){
