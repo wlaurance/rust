@@ -1,7 +1,8 @@
 var fs = require('fs'),
   spawn = require('child_process').spawn,
   backend = require('./backend'),
-  replace = require('./replace');
+  replace = require('./replace'),
+  search = require('./search');
 
 module.exports = function(params){
   backend = backend(params);
@@ -14,13 +15,27 @@ module.exports = function(params){
       };
       replace(ops, callback);
     },
-    setHTTPPort:function(port, callback){
-      var ops = {
-        regex:/http, (.+), (.+) }/,
-        value:'http, $1, ' + port + ' }',
+    getHostName:function(callback){
+      search({
+        regex:/http, (.+)"/,
+        cleaner: [
+          {clean: '[', cleanee: ''},
+          {clean: '{', cleanee: ''},
+          {clean: '"', cleanee: ''}
+        ],
+        trim: true,
         file:params.config
-      };
-      replace(ops, callback);
+      }, callback);
+    },
+    setHTTPPort:function(port, callback){
+      rust.getHostName(function(hostname){
+        var ops = {
+          regex:/http, (.+) }/,
+          value:'http, [ {"' + hostname + '", ' + port + ' }',
+          file:params.config
+        };
+        replace(ops, callback);
+      });
     },
     setHandoffPort:function(port, callback){
       var ops = {
