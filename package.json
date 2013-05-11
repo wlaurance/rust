@@ -1,6 +1,6 @@
 {
   "name": "rust",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "riak cluster like a boss",
   "main": "index.js",
   "bin": {
