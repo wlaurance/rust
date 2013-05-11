@@ -24,10 +24,10 @@
   "gitHead": "9cf425193a998385cdaa1b74a40a6ee7f68e0993",
   "devDependencies": {
     "should": "~1.2.2",
+    "async": "~0.2.6",
     "mocha": "~1.8.2"
   },
   "dependencies": {
-    "async": "~0.2.6",
     "commander": "~1.1.1"
   }
 }
