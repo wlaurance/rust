@@ -61,8 +61,8 @@ module.exports = function(params){
     },
     disablePB:function(callback){
       replace({
-        regex:/(.+){pb_ip/,
-        value:/$1% {pb_ip/,
+        regex:/{pb_ip/,
+        value:'%% {pb_ip',
         file:params.config
       }, callback);
     },
