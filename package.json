@@ -1,7 +1,7 @@
 {
   "name": "rust",
   "version": "0.1.5",
-  "description": "riak cluster like a boss",
+  "description": "riak node configuration like a boss",
   "main": "index.js",
   "bin": {
     "rust": "./rust"
@@ -16,7 +16,9 @@
   "keywords": [
     "riak",
     "cluster",
-    "configuration"
+    "node",
+    "configuration",
+    "boss"
   ],
   "author": "Will S. Laurance",
   "license": "MIT",
